@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plastic DPP Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Plastic DPP Dashboard</h1>
+    <div class="identity-bar">
+      <label>
+        Role
+        <select id="role-select">
+          <option value="manufacturer">Manufacturer</option>
+          <option value="consumer">Consumer</option>
+          <option value="recycler">Recycler</option>
+          <option value="regulator">Regulator</option>
+        </select>
+      </label>
+      <label>
+        User ID
+        <input id="user-id" type="text" placeholder="e.g. mfg-1" />
+      </label>
+      <span id="health-badge" class="badge">checking…</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. Register a product <small>(manufacturer)</small></h2>
+      <form id="register-form">
+        <input name="product_type" placeholder="Product type (e.g. PET bottle)" required />
+        <input name="material_summary" placeholder="Material summary (e.g. PET, food-grade)" required />
+        <input name="manufacture_date" type="date" required />
+        <button type="submit">Register</button>
+      </form>
+      <pre class="output" id="register-output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>2. Products <small>(read-only lookup)</small></h2>
+      <div class="row">
+        <button id="refresh-products">Refresh list</button>
+        <input id="lookup-dpp-id" placeholder="DPP ID" list="dpp-id-options" />
+        <button id="lookup-by-id">Look up by DPP ID</button>
+        <input id="lookup-qr" placeholder="QR code (e.g. qr://dpp-000001)" />
+        <button id="lookup-by-qr">Look up by QR</button>
+      </div>
+      <datalist id="dpp-id-options"></datalist>
+      <table id="products-table">
+        <thead>
+          <tr><th>DPP ID</th><th>Product Type</th><th>State</th><th>QR Code</th><th>Manufacturer</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <pre class="output" id="lookup-output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>3. Create a payment-linked transaction <small>(consumer/recycler)</small></h2>
+      <form id="transaction-form">
+        <input name="value" type="number" step="0.01" placeholder="Value (optional)" />
+        <button type="submit">Create transaction</button>
+      </form>
+      <pre class="output" id="transaction-output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>4. Submit a lifecycle transition</h2>
+      <form id="lifecycle-form">
+        <input name="dpp_id" placeholder="DPP ID" list="dpp-id-options" required />
+        <select name="target_state" required>
+          <option value="owned">owned (consumer)</option>
+          <option value="collected">collected (recycler)</option>
+          <option value="recycled">recycled (recycler)</option>
+          <option value="closed">closed (recycler)</option>
+        </select>
+        <input name="transaction_id" placeholder="Transaction ID" required />
+        <button type="submit">Submit transition</button>
+      </form>
+      <pre class="output" id="lifecycle-output"></pre>
+    </section>
+
+    <section class="card">
+      <h2>5. Lifecycle history</h2>
+      <div class="row">
+        <input id="history-dpp-id" placeholder="DPP ID" list="dpp-id-options" />
+        <button id="history-fetch">View history</button>
+      </div>
+      <table id="history-table">
+        <thead>
+          <tr><th>Timestamp</th><th>Prior</th><th>New</th><th>Actor</th><th>Role</th><th>Transaction</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>6. Regulator compliance report <small>(regulator)</small></h2>
+      <button id="report-fetch">Fetch report</button>
+      <pre class="output" id="report-output"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

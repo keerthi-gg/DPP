@@ -1,0 +1,148 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --border: #d7dce1;
+  --accent: #1f6f4a;
+  --accent-dark: #164f35;
+  --text: #1b1f23;
+  --muted: #5b6672;
+  --error: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  background: var(--accent-dark);
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.identity-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.identity-bar label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.identity-bar select,
+.identity-bar input {
+  padding: 0.3rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: #3a3f44;
+  font-size: 0.75rem;
+}
+
+.badge.ok { background: var(--accent); }
+.badge.down { background: var(--error); }
+
+main {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+.card h2 small {
+  color: var(--muted);
+  font-weight: normal;
+  font-size: 0.8rem;
+}
+
+form, .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+input, select, button {
+  padding: 0.45rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover { background: var(--accent-dark); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+th, td {
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  padding: 0.4rem 0.5rem;
+}
+
+.output {
+  margin-top: 0.75rem;
+  background: #0f172a;
+  color: #d1fae5;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  max-height: 200px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.output.error {
+  color: #fecaca;
+}
+
+.output:empty { display: none; }
